@@ -40,6 +40,7 @@ class _ApplePayScreenState extends State<ApplePayScreen> {
               padding: EdgeInsets.all(16),
               child: ApplePayButton(
                 onPressed: _handlePayPress,
+                type: ApplePayButtonType.buy,
               ),
             )
           else
