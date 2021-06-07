@@ -27,6 +27,9 @@ class SetupPaymentSheetParameters with _$SetupPaymentSheetParameters {
     /// Secret used for client-side retrieval using a publishable key.
     required String paymentIntentClientSecret,
 
+    /// Secret used for client-side retrieval using a publishable key.
+    required String setupIntentClientSecret,
+
     /// Display name of the merchant
     String? merchantDisplayName,
 

@@ -60,11 +60,12 @@ public class StripeSdk: RCTEventEmitter, STPApplePayContextDelegate, STPBankSele
     @objc(initPaymentSheet:resolver:rejecter:)
     func initPaymentSheet(params: NSDictionary, resolver resolve: @escaping RCTPromiseResolveBlock,
                           rejecter reject: @escaping RCTPromiseRejectBlock) -> Void  {
-        guard let paymentIntentClientSecret = params["paymentIntentClientSecret"] as? String else {
-            reject(PaymentSheetErrorType.Failed.rawValue, "You must provide the paymentIntentClientSecret", nil)
+        let paymentIntentClientSecret = params["paymentIntentClientSecret"] as? String
+        let setupIntentClientSecret = params["setupIntentClientSecret"] as? String
+        if paymentIntentClientSecret == nil && setupIntentClientSecret == nil {
+            reject(PaymentSheetErrorType.Failed.rawValue, "You must provide either paymentIntentClientSecret or setupIntentClientSecret", nil)
             return
         }
-        
         
         var configuration = PaymentSheet.Configuration()
         
@@ -94,8 +95,7 @@ public class StripeSdk: RCTEventEmitter, STPApplePayContextDelegate, STPBankSele
         }
         
         if params["customFlow"] as? Bool == true {
-            PaymentSheet.FlowController.create(paymentIntentClientSecret: paymentIntentClientSecret,
-                                               configuration: configuration) { [weak self] result in
+            let completion: (Result<PaymentSheet.FlowController, Error>) -> Void = { [weak self] result in
                 switch result {
                 case .failure(let error):
                     reject("Failed", error.localizedDescription, nil)
@@ -112,8 +112,23 @@ public class StripeSdk: RCTEventEmitter, STPApplePayContextDelegate, STPBankSele
                     }
                 }
             }
+            if let paymentIntentClientSecret = paymentIntentClientSecret {
+                PaymentSheet.FlowController.create(paymentIntentClientSecret: paymentIntentClientSecret,
+                                                   configuration: configuration,
+                                                   completion: completion)
+            }
+            else if let setupIntentClientSecret = setupIntentClientSecret {
+                PaymentSheet.FlowController.create(setupIntentClientSecret: setupIntentClientSecret,
+                                                   configuration: configuration,
+                                                   completion: completion)
+            }
         } else {
-            self.paymentSheet = PaymentSheet(paymentIntentClientSecret: paymentIntentClientSecret, configuration: configuration)
+            if let paymentIntentClientSecret = paymentIntentClientSecret {
+                self.paymentSheet = PaymentSheet(paymentIntentClientSecret: paymentIntentClientSecret, configuration: configuration)
+            }
+            else if let setupIntentClientSecret = setupIntentClientSecret {
+                self.paymentSheet = PaymentSheet(setupIntentClientSecret: setupIntentClientSecret, configuration: configuration)
+            }
             resolve(NSNull())
         }
     }

@@ -26,6 +26,7 @@ class _$SetupPaymentSheetParametersTearOff {
       String? customerId,
       String? customerEphemeralKeySecret,
       required String paymentIntentClientSecret,
+      required String setupIntentClientSecret,
       String? merchantDisplayName,
       String? merchantCountryCode,
       bool? applePay,
@@ -37,6 +38,7 @@ class _$SetupPaymentSheetParametersTearOff {
       customerId: customerId,
       customerEphemeralKeySecret: customerEphemeralKeySecret,
       paymentIntentClientSecret: paymentIntentClientSecret,
+      setupIntentClientSecret: setupIntentClientSecret,
       merchantDisplayName: merchantDisplayName,
       merchantCountryCode: merchantCountryCode,
       applePay: applePay,
@@ -72,6 +74,9 @@ mixin _$SetupPaymentSheetParameters {
 
   /// Secret used for client-side retrieval using a publishable key.
   String get paymentIntentClientSecret => throw _privateConstructorUsedError;
+
+  /// Secret used for client-side retrieval using a publishable key.
+  String get setupIntentClientSecret => throw _privateConstructorUsedError;
 
   /// Display name of the merchant
   String? get merchantDisplayName => throw _privateConstructorUsedError;
@@ -113,6 +118,7 @@ abstract class $SetupPaymentSheetParametersCopyWith<$Res> {
       String? customerId,
       String? customerEphemeralKeySecret,
       String paymentIntentClientSecret,
+      String setupIntentClientSecret,
       String? merchantDisplayName,
       String? merchantCountryCode,
       bool? applePay,
@@ -136,6 +142,7 @@ class _$SetupPaymentSheetParametersCopyWithImpl<$Res>
     Object? customerId = freezed,
     Object? customerEphemeralKeySecret = freezed,
     Object? paymentIntentClientSecret = freezed,
+    Object? setupIntentClientSecret = freezed,
     Object? merchantDisplayName = freezed,
     Object? merchantCountryCode = freezed,
     Object? applePay = freezed,
@@ -159,6 +166,10 @@ class _$SetupPaymentSheetParametersCopyWithImpl<$Res>
       paymentIntentClientSecret: paymentIntentClientSecret == freezed
           ? _value.paymentIntentClientSecret
           : paymentIntentClientSecret // ignore: cast_nullable_to_non_nullable
+              as String,
+      setupIntentClientSecret: setupIntentClientSecret == freezed
+          ? _value.setupIntentClientSecret
+          : setupIntentClientSecret // ignore: cast_nullable_to_non_nullable
               as String,
       merchantDisplayName: merchantDisplayName == freezed
           ? _value.merchantDisplayName
@@ -200,6 +211,7 @@ abstract class _$SetupParametersCopyWith<$Res>
       String? customerId,
       String? customerEphemeralKeySecret,
       String paymentIntentClientSecret,
+      String setupIntentClientSecret,
       String? merchantDisplayName,
       String? merchantCountryCode,
       bool? applePay,
@@ -225,6 +237,7 @@ class __$SetupParametersCopyWithImpl<$Res>
     Object? customerId = freezed,
     Object? customerEphemeralKeySecret = freezed,
     Object? paymentIntentClientSecret = freezed,
+    Object? setupIntentClientSecret = freezed,
     Object? merchantDisplayName = freezed,
     Object? merchantCountryCode = freezed,
     Object? applePay = freezed,
@@ -248,6 +261,10 @@ class __$SetupParametersCopyWithImpl<$Res>
       paymentIntentClientSecret: paymentIntentClientSecret == freezed
           ? _value.paymentIntentClientSecret
           : paymentIntentClientSecret // ignore: cast_nullable_to_non_nullable
+              as String,
+      setupIntentClientSecret: setupIntentClientSecret == freezed
+          ? _value.setupIntentClientSecret
+          : setupIntentClientSecret // ignore: cast_nullable_to_non_nullable
               as String,
       merchantDisplayName: merchantDisplayName == freezed
           ? _value.merchantDisplayName
@@ -286,6 +303,7 @@ class _$_SetupParameters implements _SetupParameters {
       this.customerId,
       this.customerEphemeralKeySecret,
       required this.paymentIntentClientSecret,
+      required this.setupIntentClientSecret,
       this.merchantDisplayName,
       this.merchantCountryCode,
       this.applePay,
@@ -320,6 +338,10 @@ class _$_SetupParameters implements _SetupParameters {
   final String paymentIntentClientSecret;
   @override
 
+  /// Secret used for client-side retrieval using a publishable key.
+  final String setupIntentClientSecret;
+  @override
+
   /// Display name of the merchant
   final String? merchantDisplayName;
   @override
@@ -351,7 +373,7 @@ class _$_SetupParameters implements _SetupParameters {
 
   @override
   String toString() {
-    return 'SetupPaymentSheetParameters(customFlow: $customFlow, customerId: $customerId, customerEphemeralKeySecret: $customerEphemeralKeySecret, paymentIntentClientSecret: $paymentIntentClientSecret, merchantDisplayName: $merchantDisplayName, merchantCountryCode: $merchantCountryCode, applePay: $applePay, style: $style, googlePay: $googlePay, testEnv: $testEnv)';
+    return 'SetupPaymentSheetParameters(customFlow: $customFlow, customerId: $customerId, customerEphemeralKeySecret: $customerEphemeralKeySecret, paymentIntentClientSecret: $paymentIntentClientSecret, setupIntentClientSecret: $setupIntentClientSecret, merchantDisplayName: $merchantDisplayName, merchantCountryCode: $merchantCountryCode, applePay: $applePay, style: $style, googlePay: $googlePay, testEnv: $testEnv)';
   }
 
   @override
@@ -369,11 +391,13 @@ class _$_SetupParameters implements _SetupParameters {
                 const DeepCollectionEquality().equals(
                     other.customerEphemeralKeySecret,
                     customerEphemeralKeySecret)) &&
-            (identical(other.paymentIntentClientSecret,
-                    paymentIntentClientSecret) ||
+            (identical(other.paymentIntentClientSecret, paymentIntentClientSecret) ||
                 const DeepCollectionEquality().equals(
                     other.paymentIntentClientSecret,
                     paymentIntentClientSecret)) &&
+            (identical(other.setupIntentClientSecret, setupIntentClientSecret) ||
+                const DeepCollectionEquality().equals(
+                    other.setupIntentClientSecret, setupIntentClientSecret)) &&
             (identical(other.merchantDisplayName, merchantDisplayName) ||
                 const DeepCollectionEquality()
                     .equals(other.merchantDisplayName, merchantDisplayName)) &&
@@ -399,6 +423,7 @@ class _$_SetupParameters implements _SetupParameters {
       const DeepCollectionEquality().hash(customerId) ^
       const DeepCollectionEquality().hash(customerEphemeralKeySecret) ^
       const DeepCollectionEquality().hash(paymentIntentClientSecret) ^
+      const DeepCollectionEquality().hash(setupIntentClientSecret) ^
       const DeepCollectionEquality().hash(merchantDisplayName) ^
       const DeepCollectionEquality().hash(merchantCountryCode) ^
       const DeepCollectionEquality().hash(applePay) ^
@@ -423,6 +448,7 @@ abstract class _SetupParameters implements SetupPaymentSheetParameters {
       String? customerId,
       String? customerEphemeralKeySecret,
       required String paymentIntentClientSecret,
+      required String setupIntentClientSecret,
       String? merchantDisplayName,
       String? merchantCountryCode,
       bool? applePay,
@@ -454,6 +480,10 @@ abstract class _SetupParameters implements SetupPaymentSheetParameters {
 
   /// Secret used for client-side retrieval using a publishable key.
   String get paymentIntentClientSecret => throw _privateConstructorUsedError;
+  @override
+
+  /// Secret used for client-side retrieval using a publishable key.
+  String get setupIntentClientSecret => throw _privateConstructorUsedError;
   @override
 
   /// Display name of the merchant
